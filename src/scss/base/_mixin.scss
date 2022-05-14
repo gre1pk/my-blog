@@ -1,0 +1,29 @@
+%text-style {
+  font-family: $default-font;
+  font-style: normal;
+  font-weight: 400;
+  color: #c4c4c4;
+}
+
+@mixin font-size-sm {
+  @extend %text-style;
+  font-size: 12px;
+  line-height: 22px;
+}
+
+@mixin font-size-base {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+@mixin font-size-Header-6 {
+  @extend %text-style;
+  font-size: 18px;
+  line-height: 28px;
+  color: $heading-color;
+}
+@mixin font-size-title {
+  @extend %text-style;
+  font-size: 20px;
+  line-height: 28px;
+}
