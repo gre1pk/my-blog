@@ -1,0 +1,29 @@
+@import '../../scss/style.scss';
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img {
+  width: 46px;
+  height: 46px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.name {
+  @include font-size-Header-6;
+  margin-right: 12px;
+  white-space: nowrap;
+}
+.secondaryText {
+  @include font-size-sm;
+}
