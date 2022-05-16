@@ -1,0 +1,15 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 17px;
+
+  & ul li {
+    background-color: inherit;
+    border: none;
+  }
+
+  & ul li button {
+    border: none !important;
+    background-color: inherit !important;
+  }
+}
