@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Pagination } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 
-import Article from '../Article'
+import ArticleItem from '../ArticleItem'
 import getArtickles from '../../store/asyncActions/articlesThunks'
 import { setPages } from '../../store/actions/articlesAction'
 
@@ -22,7 +22,7 @@ function ArticlesList() {
 
   const articleList = articles.map((el) => {
     return (
-      <Article
+      <ArticleItem
         key={el.slug}
         title={el.title}
         description={el.description}
