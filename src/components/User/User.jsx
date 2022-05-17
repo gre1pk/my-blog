@@ -1,10 +1,13 @@
 import PropsType from 'prop-types'
 
+import dateFormating from '../../handlers/formatingDate'
+
 import classes from './User.module.scss'
 import userImg from './user-icon.svg'
 
 function User({ userName, iconUrl, date, dateVisable }) {
-  const secondaryText = dateVisable ? <span className={classes.secondaryText}>{date}</span> : null
+  const dateFormat = dateFormating(new Date(date))
+  const secondaryText = dateVisable ? <span className={classes.secondaryText}>{dateFormat}</span> : null
   return (
     <div className={classes.user}>
       <div className={classes.text}>
@@ -21,7 +24,7 @@ function User({ userName, iconUrl, date, dateVisable }) {
 User.defaultProps = {
   iconUrl: userImg,
   dateVisable: true,
-  date: '',
+  date: '0',
 }
 
 User.protoType = {
