@@ -1,0 +1,16 @@
+.like {
+  display: flex;
+  align-items: center;
+}
+
+.likeHeart {
+  background-color: inherit;
+  border: none;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+.likeHeart img {
+  margin: 0 0 10px 0;
+}

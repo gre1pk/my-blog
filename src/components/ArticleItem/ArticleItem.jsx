@@ -1,31 +1,22 @@
+import { Link } from 'react-router-dom'
+
 import User from '../User'
+import TagList from '../TagList'
+import Like from '../Like'
 
 import classes from './ArticleItem.module.scss'
-import heartOff from './heart-off.svg'
 
-function ArticleItem({ title, description, body, createdAt, tagList, favorited, favoritesCount, author }) {
-  const tags = tagList
-    ? tagList.map((el) => (
-        <span className={classes.tag} key={Math.random() * 60000000}>
-          {el}
-        </span>
-      ))
-    : null
+function ArticleItem({ slug, title, description, createdAt, tagList, favoritesCount, author }) {
   return (
     <div className={classes.article}>
       <div className={classes.articleContent}>
         <div className={classes.articleHeader}>
-          <a href="/" className={classes.title}>
+          <Link to={`/articles/${slug}`} className={classes.title}>
             {title}
-          </a>
-          <div className={classes.like}>
-            <button className={classes.likeHeart} type="button">
-              <img src={heartOff} alt="Like" />
-            </button>
-            <span className={classes.likeCount}>{favoritesCount}</span>
-          </div>
+          </Link>
+          <Like favoritesCount={favoritesCount} />
         </div>
-        <div className={classes.tegWrapper}>{tags}</div>
+        <TagList tagList={tagList} />
         <p className={classes.text}>{description}</p>
       </div>
       <div className={classes.articleUser}>

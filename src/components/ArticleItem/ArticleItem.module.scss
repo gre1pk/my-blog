@@ -13,7 +13,9 @@
   display: flex;
   align-items: center;
 }
-
+.articleUser {
+  flex-shrink: 0;
+}
 .title {
   @include font-size-title;
   padding: 0 13px 4px 0;
@@ -21,27 +23,6 @@
 .tegWrapper {
   display: flex;
   margin-bottom: 4px;
-}
-.tag {
-  border: 1px solid $text-color-secondary;
-  border-radius: 2px;
-  padding: 0 5px;
-  margin-right: 8px;
+  flex-wrap: wrap;
 }
 
-.like {
-  display: flex;
-  align-items: center;
-}
-
-.likeHeart {
-  background-color: inherit;
-  border: none;
-  padding: 0;
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-}
-.likeHeart img {
-  margin: 0 0 10px 0;
-}

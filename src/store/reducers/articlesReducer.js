@@ -7,12 +7,13 @@ const defaultState = {
   currentPages: 1,
 }
 
-function articlesReduser(state = defaultState, action = {}) {
+function articlesReducer(state = defaultState, action = {}) {
   switch (action.type) {
     case 'SET_ARTICLES':
       return {
         ...state,
         loading: false,
+        error: false,
         articlesCount: action.payload.articlesCount,
         articles: [...action.payload.articles],
       }
@@ -29,10 +30,17 @@ function articlesReduser(state = defaultState, action = {}) {
         currentPages: action.payload,
       }
     }
+    case 'START_LOADING': {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      }
+    }
 
     default:
       return state
   }
 }
 
-export default articlesReduser
+export default articlesReducer

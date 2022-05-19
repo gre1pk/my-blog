@@ -1,14 +1,18 @@
 import ArticlesServices from '../../services/articlesServices'
-import { setArticleList, loadError } from '../actions/articlesAction'
+import { setArticleList, loadError, startLoading } from '../actions/articlesAction'
+import { setArticle } from '../actions/articleAction'
 
 const articlesServices = new ArticlesServices()
 
-const getArtickles = (page) => (dispath) => {
+export const getArticles = (page) => (dispatch) => {
   const offset = page * 5 - 5
+  dispatch(startLoading())
   articlesServices
     .getArticles(offset)
-    .then((res) => dispath(setArticleList(res)))
-    .catch(() => dispath(loadError()))
+    .then((res) => dispatch(setArticleList(res)))
+    .catch(() => dispatch(loadError()))
 }
 
-export default getArtickles
+export const getArticle = (slug) => (dispath) => {
+  articlesServices.getArticle(slug).then((res) => dispath(setArticle(res.article)))
+}

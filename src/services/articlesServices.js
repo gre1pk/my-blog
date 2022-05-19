@@ -20,6 +20,11 @@ class ArticlesServices {
     const res = await this.getResponce(`api/articles?limit=5&offset=${offset}`)
     return res
   }
+
+  async getArticle(slug) {
+    const res = await this.getResponce(`api/articles/${slug}`)
+    return res
+  }
 }
 
 export default ArticlesServices

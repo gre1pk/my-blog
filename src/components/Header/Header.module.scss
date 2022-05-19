@@ -27,7 +27,7 @@
   border-color: $text-color;
 }
 .create {
-  display: none;
+  display: none !important;
 
   @include font-size-base;
   color: $success-color;

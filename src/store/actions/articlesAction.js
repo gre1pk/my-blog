@@ -5,3 +5,5 @@ export const setArticlesCount = (count) => ({ type: 'SET_ARTICLES_COUNT', payloa
 export const loadError = { type: 'ERROR' }
 
 export const setPages = (num) => ({ type: 'SET_PAGES', payload: num })
+
+export const startLoading = () => ({ type: 'START_LOADING' })
