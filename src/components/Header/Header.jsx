@@ -1,4 +1,5 @@
 import { Button } from 'antd'
+import { Link } from 'react-router-dom'
 
 import User from '../User'
 
@@ -12,12 +13,16 @@ function Header() {
       <button className={classes.user} type="button">
         <User userName="John Doe" dateVisable={false} />
       </button>
-      <Button className={classes.signIn} type="link">
-        Sign In
-      </Button>
-      <Button className={classes.signUp} size="large">
-        Sign Up
-      </Button>
+      <Link to="/sign-in">
+        <Button className={classes.signIn} type="link">
+          Sign In
+        </Button>
+      </Link>
+      <Link to="/sign-up">
+        <Button className={classes.signUp} size="large">
+          Sign Up
+        </Button>
+      </Link>
       <Button className={classes.logUp} size="large">
         Log Out
       </Button>
