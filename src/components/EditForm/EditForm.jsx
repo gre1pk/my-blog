@@ -1,23 +1,23 @@
 import { useForm, Controller } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { Input, Checkbox } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { Input } from 'antd'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { setNewUser } from '../../store/asyncActions/userThunks'
 
-import classes from './RegisterForm.module.scss'
+import classes from './EditForm.module.scss'
 
 const schema = yup.object().shape({
   userName: yup.string().min(3).max(20).required(),
   email: yup.string().email().required(),
-  password: yup.string().min(6, 'Your password needs to be at least 6 characters.').max(40).required(),
-  repeatPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match'),
-  agree: yup.boolean().required(),
+  newPassword: yup.string().min(6, 'Your password needs to be at least 6 characters.').max(40).required(),
+  imgUrl: yup.string().url(),
 })
 
-function RegisterForm() {
+function EditForm() {
   const dispatch = useDispatch()
+  const { token } = useSelector((state) => state.userReducer)
   const {
     control,
     handleSubmit,
@@ -32,9 +32,10 @@ function RegisterForm() {
     const user = {
       username: data.userName,
       email: data.email,
-      password: data.password,
+      newpassword: data.newPassword,
+      image: data.image,
     }
-    dispatch(setNewUser(user))
+    dispatch(setNewUser(user, token))
   }
 
   return (
@@ -64,62 +65,37 @@ function RegisterForm() {
           {errors.email && <p className={classes.err}>{errors.email.message}</p>}
         </div>
         <div className={classes.formItem}>
-          <span className={classes.labelInput}>Password</span>
+          <span className={classes.labelInput}>New password</span>
           <Controller
             control={control}
-            name="password"
+            name="newPassword"
             render={({ field }) => (
               <Input.Password
                 {...field}
-                placeholder="Password"
+                placeholder="New password"
                 autoComplete="Password"
                 size="large"
-                status={errors.password && 'error'}
+                status={errors.newPassword && 'error'}
               />
             )}
           />
-          {errors.password && <p className={classes.err}>{errors.password.message}</p>}
+          {errors.newPassword && <p className={classes.err}>{errors.newPassword.message}</p>}
         </div>
         <div className={classes.formItem}>
-          <span className={classes.labelInput}>Repeat Password</span>
+          <span className={classes.labelInput}>Avatar image (url)</span>
           <Controller
             control={control}
-            name="repeatPassword"
+            name="imgUrl"
             render={({ field }) => (
-              <Input.Password
-                {...field}
-                autoComplete="Password"
-                placeholder="Repeat Password"
-                size="large"
-                status={errors.repeatPassword && 'error'}
-              />
+              <Input {...field} placeholder="Avatar image" size="large" status={errors.imgUrl && 'error'} />
             )}
           />
-          {errors.repeatPassword && <p className={classes.err}>{errors.repeatPassword.message}</p>}
-        </div>
-        <div className={classes.formCheckBox}>
-          <Controller
-            control={control}
-            name="agree"
-            render={({ field: { value, onChange } }) => (
-              <Checkbox
-                checked={value}
-                onChange={(e) => {
-                  onChange(e.target.checked)
-                }}
-              >
-                I agree to the processing of my personal information
-              </Checkbox>
-            )}
-          />
+          {errors.imgUrl && <p className={classes.err}>{errors.imgUrl.message}</p>}
         </div>
         <input className={classes.submit} type="submit" value="Create" />
-        <p className={classes.confidit}>
-          Already have an account? <a href="/">Sign In.</a>
-        </p>
       </div>
     </form>
   )
 }
 
-export default RegisterForm
+export default EditForm

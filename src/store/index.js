@@ -4,8 +4,9 @@ import thunk from 'redux-thunk'
 
 import articlesReducer from './reducers/articlesReducer'
 import articleReducer from './reducers/articleReducer'
+import userReducer from './reducers/userReducer'
 
-const rootReducer = combineReducers({ articlesReducer, articleReducer })
+const rootReducer = combineReducers({ articlesReducer, articleReducer, userReducer })
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
