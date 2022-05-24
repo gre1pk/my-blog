@@ -6,6 +6,7 @@ import Article from '../Article'
 import RegisterForm from '../RegisterForm'
 import LoginForm from '../LoginForm'
 import EditForm from '../EditForm'
+import RequireAuth from '../hoc/RequireAuth'
 
 import classes from './App.module.scss'
 
@@ -22,7 +23,14 @@ function App() {
             {/* add  <Route path="/articles/new" element={<ArticleNewPost />} /> */}
             <Route path="/sign-up" element={<RegisterForm />} />
             <Route path="/sign-in" element={<LoginForm />} />
-            <Route path="/profile" element={<EditForm />} />
+            <Route
+              path="/profile"
+              element={
+                <RequireAuth>
+                  <EditForm />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </main>
       </div>
