@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Input } from 'antd'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
 
 import { updateUser } from '../../store/asyncActions/userThunks'
 
@@ -17,6 +18,7 @@ const schema = yup.object().shape({
 
 function EditForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { token, userName, email } = useSelector((state) => state.userReducer)
   const {
     control,
@@ -27,8 +29,8 @@ function EditForm() {
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
+
   const onSubmit = (data) => {
-    reset()
     const user = {
       username: data.userName,
       email: data.email,
@@ -36,6 +38,8 @@ function EditForm() {
       image: data.imgUrl,
     }
     dispatch(updateUser(user, token))
+    reset()
+    navigate('/')
   }
 
   return (

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Input, Checkbox } from 'antd'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { setNewUser } from '../../store/asyncActions/userThunks'
 
@@ -18,6 +19,7 @@ const schema = yup.object().shape({
 
 function RegisterForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const {
     control,
     handleSubmit,
@@ -35,6 +37,7 @@ function RegisterForm() {
       password: data.password,
     }
     dispatch(setNewUser(user))
+    navigate('/')
   }
 
   return (
@@ -115,7 +118,7 @@ function RegisterForm() {
         </div>
         <input className={classes.submit} type="submit" value="Create" />
         <p className={classes.confidit}>
-          Already have an account? <a href="/">Sign In.</a>
+          Already have an account? <Link to="/sign-in">Sign In.</Link>
         </p>
       </div>
     </form>

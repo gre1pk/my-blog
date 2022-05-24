@@ -3,6 +3,7 @@ import { Input } from 'antd'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { setLoginUser } from '../../store/asyncActions/userThunks'
 
@@ -15,6 +16,7 @@ const schema = yup.object().shape({
 
 function LoginForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const {
     control,
@@ -33,6 +35,7 @@ function LoginForm() {
       password: data.password,
     }
     dispatch(setLoginUser(user))
+    navigate('/')
   }
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
@@ -68,7 +71,7 @@ function LoginForm() {
         </div>
         <input className={classes.submit} type="submit" value="Create" />
         <p className={classes.confidit}>
-          Don’t have an account? <a href="/">Sign Up.</a>
+          Don’t have an account? <Link to="/sign-up">Sign Up.</Link>
         </p>
       </div>
     </form>
