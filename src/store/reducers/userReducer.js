@@ -25,7 +25,13 @@ function userReducer(state = defaultState, action = {}) {
         userName: action.payload.username,
         email: action.payload.email,
         image: action.payload.image,
+        token: action.payload.token,
       }
+
+    case 'LOG_OUT': {
+      return { ...state, isLogin: false, userName: null, email: null, token: null, bio: null, image: null }
+    }
+
     default:
       return state
   }

@@ -16,7 +16,7 @@ export const setLoginUser = (data) => (dispath) => {
 }
 
 export const updateUser = (data, token) => (dispath) => {
-  articlesServices.putResponce(data, token).then((res) => {
+  articlesServices.putEditUser(data, token).then((res) => {
     dispath(setUpdateUser(res))
   })
 }

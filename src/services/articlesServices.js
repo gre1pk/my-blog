@@ -29,9 +29,17 @@ class ArticlesServices {
     }
   }
 
-  async putResponce(url, options) {
+  async putResponce(url, date, token) {
     try {
-      const result = await axios.put(`${this.baseUrl}/${url}`, options)
+      const result = await axios.put(
+        `${this.baseUrl}/${url}`,
+        {
+          user: date,
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
       if (result.statusText !== 'OK') {
         throw new Error(result.status)
       }
@@ -63,7 +71,7 @@ class ArticlesServices {
   }
 
   async putEditUser(data = {}, token = '') {
-    const res = await this.putResponce('api/users/login', { user: data, headers: { Authorization: `Token ${token}` } })
+    const res = await this.putResponce('api/user', data, token)
     return res
   }
 }

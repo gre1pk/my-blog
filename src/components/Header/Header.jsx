@@ -1,13 +1,19 @@
 import { Button } from 'antd'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import User from '../User'
+import { setLogOut } from '../../store/actions/userAction'
 
 import classes from './Header.module.scss'
 
 function Header() {
   const { isLogin, userName, image } = useSelector((state) => state.userReducer)
+  const dispatch = useDispatch()
+
+  const onLogOut = () => {
+    dispatch(setLogOut())
+  }
 
   return (
     <header className={classes.header}>
@@ -17,10 +23,10 @@ function Header() {
       {isLogin ? (
         <>
           <Button className={classes.create}>Create article</Button>
-          <button className={classes.user} type="button">
+          <Link className={classes.user} to="/profile">
             <User userName={userName} iconUrl={image} dateVisable={false} />
-          </button>
-          <Button className={classes.logUp} size="large">
+          </Link>
+          <Button className={classes.logUp} size="large" onClick={onLogOut}>
             Log Out
           </Button>
         </>
