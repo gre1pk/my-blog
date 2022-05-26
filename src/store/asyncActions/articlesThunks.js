@@ -13,6 +13,6 @@ export const getArticles = (page) => (dispatch) => {
     .catch(() => dispatch(loadError()))
 }
 
-export const getArticle = (slug) => (dispath) => {
-  articlesServices.getArticle(slug).then((res) => dispath(setArticle(res.article)))
+export const getArticle = (slug) => (dispatch) => {
+  articlesServices.getArticle(slug).then((res) => dispatch(setArticle(res.article)))
 }

@@ -7,6 +7,8 @@ import RegisterForm from '../RegisterForm'
 import LoginForm from '../LoginForm'
 import EditForm from '../EditForm'
 import RequireAuth from '../hoc/RequireAuth'
+import ArticleNew from '../ArticleForm/ArticleNew'
+import ArticleEdit from '../ArticleForm/ArticleEdit'
 
 import classes from './App.module.scss'
 
@@ -20,7 +22,22 @@ function App() {
             <Route path="/" element={<ArticlesList />} />
             <Route path="/articles" element={<ArticlesList />} />
             <Route path="/articles/:id" element={<Article />} />
-            {/* add  <Route path="/articles/new" element={<ArticleNewPost />} /> */}
+            <Route
+              path="/articles/:id/edit"
+              element={
+                <RequireAuth>
+                  <ArticleEdit />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/new-article"
+              element={
+                <RequireAuth>
+                  <ArticleNew />
+                </RequireAuth>
+              }
+            />
             <Route path="/sign-up" element={<RegisterForm />} />
             <Route path="/sign-in" element={<LoginForm />} />
             <Route

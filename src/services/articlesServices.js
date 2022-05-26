@@ -16,9 +16,9 @@ class ArticlesServices {
     }
   }
 
-  async postResponce(url, options) {
+  async postResponce(url, ...options) {
     try {
-      const result = await axios.post(`${this.baseUrl}/${url}`, options)
+      const result = await axios.post(`${this.baseUrl}/${url}`, ...options)
       if (result.statusText !== 'OK') {
         throw new Error(result.status)
       }
@@ -29,17 +29,22 @@ class ArticlesServices {
     }
   }
 
-  async putResponce(url, date, token) {
+  async putResponce(url, ...optional) {
     try {
-      const result = await axios.put(
-        `${this.baseUrl}/${url}`,
-        {
-          user: date,
-        },
-        {
-          headers: { Authorization: `Token ${token}` },
-        }
-      )
+      const result = await axios.put(`${this.baseUrl}/${url}`, ...optional)
+      if (result.statusText !== 'OK') {
+        throw new Error(result.status)
+      }
+
+      return result.data
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  async deleteResponce(url, ...optional) {
+    try {
+      const result = await axios.delete(`${this.baseUrl}/${url}`, ...optional)
       if (result.statusText !== 'OK') {
         throw new Error(result.status)
       }
@@ -71,7 +76,46 @@ class ArticlesServices {
   }
 
   async putEditUser(data = {}, token = '') {
-    const res = await this.putResponce('api/user', data, token)
+    const res = await this.putResponce(
+      'api/user',
+      {
+        user: data,
+      },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    )
+    return res
+  }
+
+  async postCreateArticle(data = {}, token = '') {
+    const res = await this.postResponce(
+      'api/articles',
+      {
+        article: data,
+      },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    )
+    return res
+  }
+
+  async putUpdateArticle(data = {}, slug = '', token = '') {
+    const res = await this.putResponce(
+      `api/articles/${slug}`,
+      { article: data },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    )
+    return res
+  }
+
+  async deleteArticle(slug, token) {
+    const res = await this.deleteResponce(`api/articles/${slug}`, {
+      headers: { Authorization: `Token ${token}` },
+    })
     return res
   }
 }

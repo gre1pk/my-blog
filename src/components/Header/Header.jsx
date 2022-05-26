@@ -22,7 +22,10 @@ function Header() {
       </Link>
       {isLogin ? (
         <>
-          <Button className={classes.create}>Create article</Button>
+          <Link to="/new-article">
+            <Button className={classes.create}> Create article</Button>
+          </Link>
+
           <Link className={classes.user} to="/profile">
             <User userName={userName} iconUrl={image} dateVisable={false} />
           </Link>

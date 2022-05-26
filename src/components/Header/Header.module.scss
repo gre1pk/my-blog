@@ -29,6 +29,9 @@
   color: $success-color !important;
   border-color: $success-color !important;
   margin-right: 26px;
+  &:hover {
+    opacity: 0.5;
+  }
 }
 .user {
   display: block;
