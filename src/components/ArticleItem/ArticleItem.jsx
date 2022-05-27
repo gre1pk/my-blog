@@ -6,7 +6,7 @@ import Like from '../Like'
 
 import classes from './ArticleItem.module.scss'
 
-function ArticleItem({ slug, title, description, createdAt, tagList, favoritesCount, author }) {
+function ArticleItem({ slug, title, description, createdAt, tagList, favoritesCount, author, favorited }) {
   return (
     <div className={classes.article}>
       <div className={classes.articleContent}>
@@ -14,7 +14,7 @@ function ArticleItem({ slug, title, description, createdAt, tagList, favoritesCo
           <Link to={`/articles/${slug}`} className={classes.title}>
             {title}
           </Link>
-          <Like favoritesCount={favoritesCount} />
+          <Like favoritesCount={favoritesCount} favorited={favorited} slug={slug} />
         </div>
         <TagList tagList={tagList} />
         <p className={classes.text}>{description}</p>

@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import { Button, Popconfirm } from 'antd'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import User from '../User'
 import TagList from '../TagList'
@@ -9,7 +10,9 @@ import Like from '../Like'
 import classes from './Article.module.scss'
 
 function ArticleUI({ article, idPage, onTogleDel }) {
-  const { slug, title, description, body, createdAt, tagList, favoritesCount, author } = article
+  const { slug, title, description, body, createdAt, tagList, favoritesCount, author, favorited } = article
+
+  const { userName } = useSelector((state) => state.userReducer)
 
   return (
     <div className={classes.conteiner}>
@@ -19,7 +22,7 @@ function ArticleUI({ article, idPage, onTogleDel }) {
             <p to={`/articles/${slug}`} className={classes.title}>
               {title}
             </p>
-            <Like favoritesCount={favoritesCount} />
+            <Like favoritesCount={favoritesCount} favorited={favorited} slug={slug} />
           </div>
           <div className={classes.tegWrapper}>
             <TagList tagList={tagList} />
@@ -28,22 +31,24 @@ function ArticleUI({ article, idPage, onTogleDel }) {
         </div>
         <div className={classes.articleUser}>
           <User userName={author.username} iconUrl={author.image} date={createdAt} dateVisable />
-          <div className={classes.btnGroup}>
-            <Popconfirm
-              title="Are you sure to delete this article?"
-              placement="right"
-              okText="Yes"
-              cancelText="No"
-              onConfirm={() => onTogleDel()}
-            >
-              <Button className={classes.delBtn} danger>
-                Delete
-              </Button>
-            </Popconfirm>
-            <Link to={`/articles/${idPage}/edit`}>
-              <Button className={classes.editBtn}>Edit</Button>
-            </Link>
-          </div>
+          {userName === author.username ? (
+            <div className={classes.btnGroup}>
+              <Popconfirm
+                title="Are you sure to delete this article?"
+                placement="right"
+                okText="Yes"
+                cancelText="No"
+                onConfirm={() => onTogleDel()}
+              >
+                <Button className={classes.delBtn} danger>
+                  Delete
+                </Button>
+              </Popconfirm>
+              <Link to={`/articles/${idPage}/edit`}>
+                <Button className={classes.editBtn}>Edit</Button>
+              </Link>
+            </div>
+          ) : null}
         </div>
       </div>
       <div>

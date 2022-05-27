@@ -11,10 +11,11 @@ import classes from './ArticlesList.module.scss'
 function ArticlesList() {
   const dispatch = useDispatch()
   const { articles, articlesCount, currentPages, loading, error } = useSelector((store) => store.articlesReducer)
+  const { token } = useSelector((state) => state.userReducer)
 
   useEffect(() => {
-    dispatch(getArticles(currentPages))
-  }, [dispatch, currentPages])
+    dispatch(getArticles(currentPages, token))
+  }, [dispatch, currentPages, token])
 
   const onCurrentPages = (value) => {
     dispatch(setPages(value))
@@ -30,6 +31,7 @@ function ArticlesList() {
       tagList={el.tagList}
       favoritesCount={el.favoritesCount}
       author={el.author}
+      favorited={el.favorited}
     />
   ))
 

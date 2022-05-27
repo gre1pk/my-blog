@@ -1,11 +1,13 @@
 import { useForm, Controller } from 'react-hook-form'
-import { Input } from 'antd'
+import { Input, message } from 'antd'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 import { setLoginUser } from '../../store/asyncActions/userThunks'
+import { setClearErrMsg } from '../../store/actions/userAction'
 
 import classes from './LoginForm.module.scss'
 
@@ -16,7 +18,19 @@ const schema = yup.object().shape({
 
 function LoginForm() {
   const dispatch = useDispatch()
+  const { errMasage, isLogin } = useSelector((state) => state.userReducer)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (errMasage) {
+      return message.error(errMasage)
+    }
+    if (isLogin) {
+      navigate('/')
+    }
+
+    return () => dispatch(setClearErrMsg())
+  }, [errMasage, navigate, isLogin, dispatch])
 
   const {
     control,
@@ -35,8 +49,8 @@ function LoginForm() {
       password: data.password,
     }
     dispatch(setLoginUser(user))
-    navigate('/')
   }
+
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
       <div className={classes.container}>

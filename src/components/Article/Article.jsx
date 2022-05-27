@@ -19,10 +19,10 @@ function Article() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(getArticle(id))
+    dispatch(getArticle(id, token))
 
     return () => dispatch(clearArticle())
-  }, [id, dispatch])
+  }, [id, dispatch, token])
 
   const onTogleDel = async () => {
     await articlesServices.deleteArticle(id, token).catch(() => {

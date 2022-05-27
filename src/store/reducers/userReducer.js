@@ -1,5 +1,6 @@
 const defaultState = {
   isLogin: false,
+  errMasage: null,
   userName: null,
   email: null,
   token: null,
@@ -13,6 +14,7 @@ function userReducer(state = defaultState, action = {}) {
       return {
         ...state,
         isLogin: true,
+        errMasage: null,
         userName: action.payload.username,
         email: action.payload.email,
         token: action.payload.token,
@@ -30,6 +32,20 @@ function userReducer(state = defaultState, action = {}) {
 
     case 'LOG_OUT': {
       return { ...state, isLogin: false, userName: null, email: null, token: null, bio: null, image: null }
+    }
+
+    case 'ERR_MSG': {
+      return {
+        ...state,
+        errMasage: action.payload,
+      }
+    }
+
+    case 'CLEAR_ERR_MSG': {
+      return {
+        ...state,
+        errMasage: null,
+      }
     }
 
     default:
