@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import ArticlesServices from '../../services/articlesServices'
 
@@ -40,6 +41,12 @@ function Like({ favoritesCount, favorited, slug }) {
       <span className={classes.likeCount}>{count}</span>
     </div>
   )
+}
+
+Like.propTypes = {
+  favoritesCount: PropTypes.number.isRequired,
+  favorited: PropTypes.bool.isRequired,
+  slug: PropTypes.string.isRequired,
 }
 
 export default Like

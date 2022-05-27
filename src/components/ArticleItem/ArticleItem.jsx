@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import User from '../User'
 import TagList from '../TagList'
@@ -24,6 +25,28 @@ function ArticleItem({ slug, title, description, createdAt, tagList, favoritesCo
       </div>
     </div>
   )
+}
+
+ArticleItem.defaultProps = {
+  slug: 'not set',
+  title: 'not set',
+  description: 'not set',
+  createdAt: 'not set',
+  tagList: ['not set'],
+  favoritesCount: 0,
+  author: {},
+  favorited: false,
+}
+
+ArticleItem.propTypes = {
+  slug: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  createdAt: PropTypes.string,
+  tagList: PropTypes.arrayOf(PropTypes.string),
+  favoritesCount: PropTypes.number,
+  author: PropTypes.shape(),
+  favorited: PropTypes.bool,
 }
 
 export default ArticleItem

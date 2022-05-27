@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import { Button, Popconfirm } from 'antd'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import User from '../User'
 import TagList from '../TagList'
@@ -56,6 +57,24 @@ function ArticleUI({ article, idPage, onTogleDel }) {
       </div>
     </div>
   )
+}
+ArticleUI.defaultProps = {
+  onTogleDel: () => {},
+}
+ArticleUI.propTypes = {
+  article: PropTypes.shape({
+    slug: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    body: PropTypes.string,
+    createdAt: PropTypes.string,
+    tagList: PropTypes.arrayOf(PropTypes.string),
+    favoritesCount: PropTypes.number,
+    author: PropTypes.shape(),
+    favorited: PropTypes.bool,
+  }).isRequired,
+  idPage: PropTypes.string.isRequired,
+  onTogleDel: PropTypes.func,
 }
 
 export default ArticleUI

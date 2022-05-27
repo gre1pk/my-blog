@@ -27,7 +27,7 @@ User.defaultProps = {
   date: '0',
 }
 
-User.protoType = {
+User.propTypes = {
   userName: PropsType.string.isRequired,
   dateVisable: PropsType.bool,
   iconUrl: PropsType.string,

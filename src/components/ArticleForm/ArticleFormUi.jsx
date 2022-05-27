@@ -3,6 +3,7 @@ import { Input, Button } from 'antd'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import generateKey from '../../handlers/generateKey'
 
@@ -16,7 +17,7 @@ const schema = yup.object().shape({
   text: yup.string().required(),
 })
 
-function ArticleFormUi({ titleForm, titleAtr, descriptionArt, textArt, tagListArt = [''], onGetArticle }) {
+function ArticleFormUi({ titleForm, titleAtr, descriptionArt, textArt, tagListArt, onGetArticle }) {
   const [tagCount, setTagCount] = useState([...tagListArt])
   const {
     control,
@@ -115,6 +116,23 @@ function ArticleFormUi({ titleForm, titleAtr, descriptionArt, textArt, tagListAr
       </form>
     </div>
   )
+}
+
+ArticleFormUi.defaultProps = {
+  titleForm: '',
+  titleAtr: '',
+  descriptionArt: '',
+  textArt: '',
+  tagListArt: [''],
+}
+
+ArticleFormUi.propTypes = {
+  titleForm: PropTypes.string,
+  titleAtr: PropTypes.string,
+  descriptionArt: PropTypes.string,
+  textArt: PropTypes.string,
+  tagListArt: PropTypes.arrayOf(PropTypes.string),
+  onGetArticle: PropTypes.func.isRequired,
 }
 
 export default ArticleFormUi
