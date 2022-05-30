@@ -33,6 +33,7 @@
 .text {
   color: $text-color-secondary;
   padding-bottom: 25px;
+  word-break: break-all;
 }
 .btnGroup {
   margin-top: 30px;
@@ -45,4 +46,7 @@
 .delBtn {
   margin-right: 12px;
   border-radius: 5px !important;
+}
+.body {
+  word-break: break-all;
 }

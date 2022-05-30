@@ -15,6 +15,8 @@ function ArticleUI({ article, idPage, onTogleDel }) {
 
   const { userName } = useSelector((state) => state.userReducer)
 
+  // const newBody = body
+
   return (
     <div className={classes.conteiner}>
       <div className={classes.article}>
@@ -52,9 +54,7 @@ function ArticleUI({ article, idPage, onTogleDel }) {
           ) : null}
         </div>
       </div>
-      <div>
-        <ReactMarkdown>{body}</ReactMarkdown>
-      </div>
+      <ReactMarkdown className={classes.body}>{body}</ReactMarkdown>
     </div>
   )
 }
