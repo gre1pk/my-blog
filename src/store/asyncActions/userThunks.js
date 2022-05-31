@@ -4,9 +4,16 @@ import { setUser, setUpdateUser, setErrMsg } from '../actions/userAction'
 const articlesServices = new ArticlesServices()
 
 export const setNewUser = (data) => (dispath) => {
-  articlesServices.postRegistorUser(data).then((res) => {
-    dispath(setUser(res))
-  })
+  articlesServices
+    .postRegistorUser(data)
+    .then((res) => {
+      dispath(setUser(res))
+    })
+    .catch((error) => {
+      if (error.message === '422') {
+        dispath(setErrMsg('This email or name is already in use'))
+      }
+    })
 }
 
 export const setLoginUser = (data) => (dispath) => {

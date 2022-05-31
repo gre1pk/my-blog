@@ -1,11 +1,13 @@
 import { useForm, Controller } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { Input, Checkbox } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { Input, Checkbox, message } from 'antd'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 import { setNewUser } from '../../store/asyncActions/userThunks'
+import { setClearErrMsg } from '../../store/actions/userAction'
 
 import classes from './RegisterForm.module.scss'
 
@@ -20,6 +22,18 @@ const schema = yup.object().shape({
 function RegisterForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { errMasage, isLogin } = useSelector((state) => state.userReducer)
+
+  useEffect(() => {
+    if (errMasage) {
+      message.error(errMasage)
+    }
+    if (isLogin) {
+      navigate('/')
+    }
+
+    return () => dispatch(setClearErrMsg())
+  }, [errMasage, navigate, isLogin, dispatch])
   const {
     control,
     handleSubmit,
@@ -37,7 +51,6 @@ function RegisterForm() {
       password: data.password,
     }
     dispatch(setNewUser(user))
-    navigate('/')
   }
 
   return (
