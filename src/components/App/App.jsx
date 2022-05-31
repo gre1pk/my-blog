@@ -9,6 +9,7 @@ import EditForm from '../EditForm'
 import RequireAuth from '../hoc/RequireAuth'
 import ArticleNew from '../ArticleForm/ArticleNew'
 import ArticleEdit from '../ArticleForm/ArticleEdit'
+import NotfoundPage from '../NotfoundPage'
 
 import classes from './App.module.scss'
 
@@ -48,6 +49,7 @@ function App() {
                 </RequireAuth>
               }
             />
+            <Route path="*" element={<NotfoundPage />} />
           </Routes>
         </main>
       </div>
