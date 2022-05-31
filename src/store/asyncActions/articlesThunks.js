@@ -1,6 +1,6 @@
 import ArticlesServices from '../../services/articlesServices'
 import { setArticleList, loadError, startLoading } from '../actions/articlesAction'
-import { setArticle } from '../actions/articleAction'
+import { setArticle, setError } from '../actions/articleAction'
 
 const articlesServices = new ArticlesServices()
 
@@ -14,5 +14,8 @@ export const getArticles = (page, token) => (dispatch) => {
 }
 
 export const getArticle = (slug, token) => (dispatch) => {
-  articlesServices.getArticle(slug, token).then((res) => dispatch(setArticle(res.article)))
+  articlesServices
+    .getArticle(slug, token)
+    .then((res) => dispatch(setArticle(res.article)))
+    .catch(() => dispatch(setError()))
 }

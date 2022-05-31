@@ -23,7 +23,7 @@ function LoginForm() {
 
   useEffect(() => {
     if (errMasage) {
-      return message.error(errMasage)
+      message.error(errMasage)
     }
     if (isLogin) {
       navigate('/')

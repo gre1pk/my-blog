@@ -1,5 +1,6 @@
 const defaultState = {
   article: null,
+  isError: false,
 }
 
 const articleReducer = (state = defaultState, action = {}) => {
@@ -7,7 +8,11 @@ const articleReducer = (state = defaultState, action = {}) => {
     return { ...state, article: action.payload }
   }
   if (action.type === 'CLEAR_ARTICLE') {
-    return { ...state, article: null }
+    return { ...state, article: null, isError: false }
+  }
+
+  if (action.type === 'IS_ERROR') {
+    return { ...state, isError: true }
   }
   return state
 }
