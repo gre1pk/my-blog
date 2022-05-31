@@ -83,7 +83,7 @@ function LoginForm() {
           />
           {errors.password && <p className={classes.err}>{errors.password.message}</p>}
         </div>
-        <input className={classes.submit} type="submit" value="Create" />
+        <input className={classes.submit} type="submit" value="Login" />
         <p className={classes.confidit}>
           Don’t have an account? <Link to="/sign-up">Sign Up.</Link>
         </p>

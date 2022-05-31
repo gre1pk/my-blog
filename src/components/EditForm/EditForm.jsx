@@ -108,7 +108,7 @@ function EditForm() {
           />
           {errors.imgUrl && <p className={classes.err}>{errors.imgUrl.message}</p>}
         </div>
-        <input className={classes.submit} type="submit" value="Create" />
+        <input className={classes.submit} type="submit" value="Save" />
       </div>
     </form>
   )

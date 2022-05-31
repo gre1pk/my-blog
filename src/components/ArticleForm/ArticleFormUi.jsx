@@ -112,7 +112,7 @@ function ArticleFormUi({ titleForm, titleAtr, descriptionArt, textArt, tagListAr
           <p className={classes.itemText}>Tags</p>
           {tagRender}
         </div>
-        <input className={classes.submit} type="submit" value="Sendq" />
+        <input className={classes.submit} type="submit" value="Send" />
       </form>
     </div>
   )
